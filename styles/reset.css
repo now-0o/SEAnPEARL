@@ -1,0 +1,30 @@
+*{ 
+    margin:0; 
+    padding:0; 
+    box-sizing: border-box;
+}
+
+a{
+    color:inherit;
+    text-decoration: none;
+}
+
+li{ list-style-type: none;}
+body{ 
+    /* font지정 */
+}
+
+.flax-row-center{
+/* .f-ro-ce{ */
+    display: flex;
+    justify-content: center;
+}
+.flax-row-between{
+    display: flex;
+    justify-content: space-between;
+}
+.flax-column-center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

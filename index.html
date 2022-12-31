@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <title>SEANPEARL</title>
+    <link rel="stylesheet" href="./styles/reset.css">
+    <style>
+        :root {
+            --gray : #c6c6c6;
+            --navy : #1b3b6a
+        }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 100px;
+            position: fixed;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            z-index: 99;
+        }
+        header.active {
+            background-color: white;
+            transition-duration: .4s;
+            border-bottom: 1px solid rgba(51, 51, 51, 0.212);
+        }
+        header.active li {
+            color: black;
+        }
+        header.active .gnb {
+            color: var(--navy);
+        }
+        header.active .logo a:nth-child(1), header.active .gnb img:nth-child(1) {
+            display: none;
+        }
+        header.active .logo a:nth-child(2),header.active .gnb img:nth-child(2) {
+            display: block;
+        }
+        .lnb ul {
+            width: 780px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 80px;
+            position: relative;
+        }
+        .lnb ul>li {
+            font-size: 18px;
+            width: 65px;
+            letter-spacing: -1px;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .logo {
+            margin-left: 60px;
+        }
+        .logo a:nth-child(2) {
+            display: none;
+        }
+        .gnb {
+            margin-right: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            gap: 10px;
+            font-family: 'Roboto', sans-serif;
+        }
+        .gnb img:nth-child(2) {
+            display: none;
+        }
+        .quick_menu li {
+            width: 80px;
+            height: 255px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        .quick_menu li:nth-child(1) {
+            background-color: var(--navy);
+            color: white;
+            text-align: center;
+        }
+        .quick_menu li:nth-child(2) {
+            background-color: var(--gray);
+            color: var(--navy);
+        }
+        .lnb ul>li>ul {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            width: 80px;
+            position: absolute;
+            top: 80px;
+        }
+        .lnb ul ul li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80px;
+        }
+        .lnb ul ul a {
+            font-size: 14px;
+        }
+
+        /* Main */
+        .Main {
+            width: 1903px;
+            height: 960px;
+            position: relative;
+        }
+        .img-container {
+            width: 100%;
+            height: 960px;
+        }
+        .bg1 {
+            width: 100%;
+            height: 960px;
+            background-image: url(./images/index/main-bg.png);
+        }
+        .bg2 {
+            width: 100%;
+            height: 960px;
+            background-image: url(./images/index/main-bg2.png);
+        }
+        .txt span:nth-of-type(1) {
+            position: absolute;
+            top: 250px;
+            left: 360px;
+            color: white;    
+            font-size: 23px;
+            font-weight: 200;
+        }
+        .txt span:nth-of-type(1) b {
+            font-weight: 500;
+        }
+        .txt span:nth-of-type(2) {
+            position: absolute;
+            top: 295px;
+            left: 360px;
+            color: white;    
+        }
+        .txt span:nth-of-type(3) {
+            position: absolute;
+            top: 380px;
+            left: 360px;
+            color: white;    
+            font-size: 23px;
+            background-color: var(--navy);
+            border-radius: 15px;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.158);
+            padding: 5px 20px;
+        }
+        .indicator {
+            position: absolute;
+            width: 180px;
+            height: 100px;
+            z-index: 99;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+        }
+        .indi-box1, .indi-box2 {
+            width: 60px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .front1, .front2 {
+            width: 40px;
+            height: 5px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.411);
+            overflow: hidden;
+            position: absolute;
+        }
+        .back1, .back2 {
+            width: 40px;
+            height: 5px;
+            background-color: white;
+            border-radius: 5px;
+            transform: translateX(-40px);
+            position: absolute;
+        }
+
+        /* Navigation Dots */
+        .navi-container {
+            position: fixed;
+            top: 450px;
+            left: 65px;
+            z-index: 99;
+        }
+        .navi-container ul {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .dot-li {
+            display: flex;
+            gap: 10px;
+        }
+        .dot-li a {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            gap: 10px;
+            height: 30px;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            display: block;
+            background-color: white;
+            transition-duration: .4s;
+        }
+        .dot.active {
+            background-color: var(--navy);
+        }
+        .dot-li>a+span>span {
+            width: 110px;
+            height: 30px;
+            border-radius: 30px;
+            font-size: 14px;
+            letter-spacing: -.3px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .dot-main {
+            color: var(--navy);
+            background-color: white;
+        }
+        .dot-pri {
+            color: white;
+            background-color: var(--navy);
+        }
+        .dot-box {
+            display: none;
+        }
+        .pri {
+            width: 1903px;
+            height: 860px;
+            background-image: url(./images/index/pri-bg.png);
+            background-repeat: no-repeat;
+            background-position: right;
+            background-size: contain;
+        }
+        .quick-container {
+            position: fixed;
+            width: 80px;
+            height: 510px;
+            right: 0;
+            top: 265px;
+            z-index: 99;
+        }
+        .quick_menu li:nth-child(2) {
+            writing-mode: vertical-lr;
+        }
+
+        /* Pri */
+        .pri-content {
+            position: relative;
+        }
+        .pri-txt {
+            position: absolute;
+            left: 360px;
+            top: 180px;
+            color: var(--navy);
+        }
+        .pri-txt span:nth-of-type(1) {
+            font-size: 50px;
+            font-weight: 900;
+            letter-spacing: -.3px;
+            display: block;
+            margin-bottom: 50px;
+        }
+        .pri-txt span:nth-of-type(2) {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 20px;
+        }
+        .pri-txt span:nth-of-type(3) {
+            width: 90px;
+            height: 90px;
+            background-image: url(./images/index/pri-icon-1.png);
+            background-position: center center;
+            background-color: var(--navy);
+            background-repeat: no-repeat;
+            border-radius: 90px;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .pri-txt span:nth-of-type(4) {
+            font-size: 42px;
+            letter-spacing: -.5px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .pri-txt span:nth-of-type(5) {
+            color: #333;
+            font-size: 16px;
+            letter-spacing: -.5px;
+            margin-bottom: 75px;
+            display: block;
+        }
+        .pri-txt a {
+            font-size: 16px;
+            letter-spacing: -.5px;
+            font-weight: 700;
+        }
+        .right-img {
+            position: absolute;
+            right: 160px;
+            top: 85px
+        }
+    </style>
+</head>
+<body>
+    <nav class="navi-container">
+        <ul>
+            <li class="dot-li">
+                <a href="#">
+                    <span class="dot"></span>  
+                </a> 
+                <span class="dot-box"><span class="dot-main">Main</span></span>
+            </li>
+            <li class="dot-li">
+                <a href="#">
+                    <span class="dot"></span>
+                </a>
+                <span class="dot-box"><span class="dot-pri">Premium</span></span>
+            </li>
+            <li class="dot-li"><a href="#"><span class="dot"></span></a></li>
+            <li class="dot-li"><a href="#"><span class="dot"></span></a></li>
+        </ul>   
+    </nav>
+    <nav class="quick-container">
+        <ul class="quick_menu">
+            <li>OPEN<br>예정</li>
+            <li><a href="#" class="">관심고객등록</a></li>
+        </ul>
+    </nav>
+    <header>
+        <div class="logo">
+            <a href="#"><img src="./images/index/main-logo.png" alt=""></a>
+            <a href="#"><img src="./images/index/pri-logo.png" alt=""></a>
+        </div>
+        <div class="lnb">
+            <ul>
+                <li>
+                    <a href="#">사업안내</a>
+                    <ul>
+                        <li><a href="#">사업개요</a></li>
+                        <li><a href="#">오시는길</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">프리미엄</a>
+                    <ul>
+                        <li><a href="#">입지환경</a></li>
+                        <li><a href="#">프리미엄5</a></li>
+                        <li><a href="#">상업시설</a></li>
+                        <li><a href="#">오피스</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">세대안내</a>
+                    <ul>
+                        <li><a href="#">타입안내</a></li>
+                        <li><a href="#">호수배치도</a></li>
+                        <li><a href="#">인테리어</a></li>
+                        <li><a href="#">E-모델하우스</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">분양안내</a>
+                    <ul>
+                        <li><a href="#">분양일정</a></li>
+                        <li><a href="#">모집공고</a></li>
+                        <li><a href="#">청약안내</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">홍보센터</a>
+                    <ul>
+                        <li><a href="#">언론보도</a></li>
+                        <li><a href="#">홍보영상</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">관심고객</a>
+                    <ul>
+                        <li><a href="#">관심고객등록</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="gnb">
+            <img src="./images/index/index-tel-white.png" alt="">
+            <img src="./images/index/index-tel-navy.png" alt="">
+            <span>1533-2477</span>
+        </div>
+    </header>
+    <section>
+        <ul>
+            <li class="Main">
+                <div class="img-container">
+                    <div class="bg2"><div class="bg1"></div></div>
+                    <div class="indicator">
+                        <div class="indi-box1">
+                            <div class="front1">
+                                <span class="back1"></span>
+                            </div>
+                        </div>
+                        <div class="indi-box2">
+                            <div class="front2">
+                                <span class="back2"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="txt">
+                        <span>투자는 <b>MIX</b> 가치는 <b>MAX</b></span><br>
+                        <span><img src="./images/index/main-seanpearl.png" alt=""></span><br>
+                        <span>프리미엄 올 인 시티</span>
+                    </div>
+                </div>
+            </li>
+            <li class="pri">
+                <ul>
+                    <li class="pri-content">
+                        <div class="pri-txt">
+                            <span>PREMIUM</span>
+                            <span>LOCATION PREMIUM 01</span>
+                            <span></span>
+                            <span>올인 입지 프리미엄</span>
+                            <span>송도국제도시, 배곧신도시, 시화국가산업단지,<br>시화MTV중심에 있는 입지 프리미엄</span>
+                            <a href="#">More view</a>
+                        </div>
+                        <div class="right-img">
+                            <img src="./images/index/pri-main-1.png" alt="">
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li class="unit"></li>
+            <li class="location"></li>
+            <li class="footer"></li>
+        </ul>
+    </section>
+</body>
+<script src="./script/jquery-3.6.1.js"></script>
+<script src="./script/jquery-ui.js"></script>
+<script src="./script/jquery.mousewheel.js"></script>
+<script>
+    function init(index,sectionTop){
+            $('html, body').stop().animate({'scrollTop' : sectionTop }, 400);
+            if(index==1){      
+                $('header').addClass('active');
+                $('.dot').addClass('active'); 
+            }
+            else if(index==0){    
+                $('header').removeClass('active');
+                $('.dot').removeClass('active');         
+            }
+        }
+
+    $('section li').mousewheel(function(event){
+        console.log( event.deltaX,  event.deltaY, event.deltaFactor );
+        // event.deltaY :  휠을 아래로 -1, 위로 1
+        let index = 0;
+        let sectionTop ; 
+
+        if( event.deltaY > 0){
+            // 휠을 위로 올릴 때
+            index = $(this).prev().index();
+            sectionTop = $(this).prev().offset().top; 
+        }else if( event.deltaY < 0 ){
+            // 휠을 아래로 내릴 때
+            index = $(this).next().index();
+            sectionTop = ($(this).next().offset().top);
+        }
+
+        init(index, sectionTop);
+    })
+    $('.dot').on('click',function(){
+        let index = $(this).parent().parent().index();
+        sectionTop = ($('section li').eq(index).offset().top);
+        init(index,sectionTop);
+        console.log(index);
+    })
+    
+    $('.dot').on('mouseover',function(){
+        let pop = $(this).parent().next();
+        pop.stop().fadeIn(300);
+    })
+    $('.dot').on('mouseleave',function(){
+        let pop = $(this).parent().next();
+        pop.stop().fadeOut(300);
+    })
+
+    let toggle = 0;
+    $(window).ready(function(){
+        $('.back1').animate({"margin-left":"40px"},4000)
+        setInterval(() => {
+            if(toggle===-1){
+                $('.bg1').animate({opacity : '1'},400);   
+                $('.back1').animate({"margin-left":"40px"},4000)
+                toggle++;
+            }
+            else if(toggle===0){
+                $('.bg1').animate({opacity : '0'},400);
+                $('.back2').animate({"margin-left":"40px"},4000).animate({'margin-left':'0'},0)
+                $('.back1').animate({"margin-left":"40px"},4000).animate({'margin-left':'0'},0)
+                toggle= -1;
+            }
+        }, 4000);
+    })
+</script>
+</html>
