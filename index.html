@@ -31,7 +31,7 @@
             transition-duration: .4s;
             border-bottom: 1px solid rgba(51, 51, 51, 0.212);
         }
-        header.active li {
+        header.active .lnb ul>li {
             color: black;
         }
         header.active .gnb {
@@ -101,10 +101,12 @@
         .lnb ul>li>ul {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             gap: 20px;
             width: 80px;
+            height: 0;
+            overflow: hidden;
             position: absolute;
             top: 80px;
         }
@@ -117,7 +119,18 @@
         .lnb ul ul a {
             font-size: 14px;
         }
-
+        .sub-back {
+            width: 1920px;
+            background-color: rgb(255, 255, 255);
+            position: absolute;
+            left: 0;
+            top: 100px;
+            z-index: -1;
+        }
+        .lnb-sub li a {
+            color: black;
+        }
+        
         /* Main */
         .Main {
             width: 1903px;
@@ -246,11 +259,11 @@
             align-items: center;
             justify-content: center;
         }
-        .dot-main {
+        .dot-pop {
             color: var(--navy);
             background-color: white;
         }
-        .dot-pri {
+        .dot-pop.active {
             color: white;
             background-color: var(--navy);
         }
@@ -343,13 +356,13 @@
                 <a href="#">
                     <span class="dot"></span>  
                 </a> 
-                <span class="dot-box"><span class="dot-main">Main</span></span>
+                <span class="dot-box"><span class="dot-pop">Main</span></span>
             </li>
             <li class="dot-li">
                 <a href="#">
                     <span class="dot"></span>
                 </a>
-                <span class="dot-box"><span class="dot-pri">Premium</span></span>
+                <span class="dot-box"><span class="dot-pop">Premium</span></span>
             </li>
             <li class="dot-li"><a href="#"><span class="dot"></span></a></li>
             <li class="dot-li"><a href="#"><span class="dot"></span></a></li>
@@ -370,14 +383,14 @@
             <ul>
                 <li>
                     <a href="#">사업안내</a>
-                    <ul>
+                    <ul class="lnb-sub">
                         <li><a href="#">사업개요</a></li>
                         <li><a href="#">오시는길</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="#">프리미엄</a>
-                    <ul>
+                    <ul class="lnb-sub">
                         <li><a href="#">입지환경</a></li>
                         <li><a href="#">프리미엄5</a></li>
                         <li><a href="#">상업시설</a></li>
@@ -386,7 +399,7 @@
                 </li>
                 <li>
                     <a href="#">세대안내</a>
-                    <ul>
+                    <ul class="lnb-sub">
                         <li><a href="#">타입안내</a></li>
                         <li><a href="#">호수배치도</a></li>
                         <li><a href="#">인테리어</a></li>
@@ -395,7 +408,7 @@
                 </li>
                 <li>
                     <a href="#">분양안내</a>
-                    <ul>
+                    <ul class="lnb-sub">
                         <li><a href="#">분양일정</a></li>
                         <li><a href="#">모집공고</a></li>
                         <li><a href="#">청약안내</a></li>
@@ -403,18 +416,19 @@
                 </li>
                 <li>
                     <a href="#">홍보센터</a>
-                    <ul>
+                    <ul class="lnb-sub">
                         <li><a href="#">언론보도</a></li>
                         <li><a href="#">홍보영상</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="#">관심고객</a>
-                    <ul>
+                    <ul class="lnb-sub">
                         <li><a href="#">관심고객등록</a></li>
                     </ul>
                 </li>
             </ul>
+            <div class="sub-back"></div>
         </div>
         <div class="gnb">
             <img src="./images/index/index-tel-white.png" alt="">
@@ -474,15 +488,21 @@
 <script src="./script/jquery-ui.js"></script>
 <script src="./script/jquery.mousewheel.js"></script>
 <script>
+    let headerToken = false;
+
     function init(index,sectionTop){
             $('html, body').stop().animate({'scrollTop' : sectionTop }, 400);
             if(index==1){      
                 $('header').addClass('active');
                 $('.dot').addClass('active'); 
+                $('.dot-pop').addClass('active');
+                headerToken = true;
             }
             else if(index==0){    
                 $('header').removeClass('active');
-                $('.dot').removeClass('active');         
+                $('.dot').removeClass('active'); 
+                $('.dot-pop').removeClass('active');    
+                headerToken = false;    
             }
         }
 
@@ -491,7 +511,6 @@
         // event.deltaY :  휠을 아래로 -1, 위로 1
         let index = 0;
         let sectionTop ; 
-
         if( event.deltaY > 0){
             // 휠을 위로 올릴 때
             index = $(this).prev().index();
@@ -520,6 +539,17 @@
         pop.stop().fadeOut(300);
     })
 
+    $('header').on('mouseover',function(){
+        $('.lnb-sub').stop().animate({'height':'200px'});
+        $('.sub-back').stop().animate({'height':'180px'},300);
+        $('header').addClass('active');
+    })
+    $('header').on('mouseleave',function(){
+        $('.lnb-sub').stop().animate({'height':'0'},300);
+        $('.sub-back').stop().animate({'height':'0'});
+        if(!headerToken) $('header').removeClass('active');
+    })
+
     let toggle = 0;
     $(window).ready(function(){
         $('.back1').animate({"margin-left":"40px"},4000)
@@ -536,6 +566,10 @@
                 toggle= -1;
             }
         }, 4000);
+    })
+
+    $('a').click(function(event){
+        event.preventDefault();
     })
 </script>
 </html>
