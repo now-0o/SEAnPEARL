@@ -228,13 +228,12 @@
         }
         .dot-li {
             display: flex;
-            gap: 10px;
+            gap: 30px;
         }
         .dot-li a {
             display: flex;
             justify-content: start;
             align-items: center;
-            gap: 10px;
             height: 30px;
         }
         .dot {
@@ -247,6 +246,22 @@
         }
         .dot.active {
             background-color: var(--navy);
+        }
+        .dot-back {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.304);
+            border-radius: 30px;
+            border: 1px solid white;
+            opacity: .5;
+            left: -10px;
+            display: none;
+            z-index: -1;
+        }
+        .dot-back.active {
+            background-color: #1b3b6a39;
+            border-color: var(--navy);
         }
         .dot-li>a+span>span {
             width: 110px;
@@ -270,14 +285,6 @@
         .dot-box {
             display: none;
         }
-        .pri {
-            width: 1903px;
-            height: 860px;
-            background-image: url(./images/index/pri-bg.png);
-            background-repeat: no-repeat;
-            background-position: right;
-            background-size: contain;
-        }
         .quick-container {
             position: fixed;
             width: 80px;
@@ -291,8 +298,18 @@
         }
 
         /* Pri */
+        .pri {
+            width: 1903px;
+            height: 860px;
+            background-image: url(./images/index/pri-bg.png);
+            background-repeat: no-repeat;
+            background-position: right;
+            background-size: contain;
+        }
         .pri-content {
             position: relative;
+            width: 1903px;
+            height: 860px;
         }
         .pri-txt {
             position: absolute;
@@ -312,10 +329,24 @@
             display: block;
             margin-bottom: 20px;
         }
+        .txt1 span:nth-last-of-type(3) {
+            background-image: url(./images/index/pri-icon-1.png);
+        }
+        .txt2 span:nth-last-of-type(3) {
+            background-image: url(./images/index/pri-icon-2.png);
+        }
+        .txt3 span:nth-last-of-type(3) {
+            background-image: url(./images/index/pri-icon-3.png);
+        }
+        .txt4 span:nth-last-of-type(3) {
+            background-image: url(./images/index/pri-icon-4.png);
+        }
+        .txt5 span:nth-last-of-type(3) {
+            background-image: url(./images/index/pri-icon-5.png);
+        }
         .pri-txt span:nth-of-type(3) {
             width: 90px;
             height: 90px;
-            background-image: url(./images/index/pri-icon-1.png);
             background-position: center center;
             background-color: var(--navy);
             background-repeat: no-repeat;
@@ -345,7 +376,36 @@
         .right-img {
             position: absolute;
             right: 160px;
-            top: 85px
+            top: 85px;
+        }
+        .slider-btn {
+            width: 106px;
+            height: 40px;
+            position: absolute;
+            left: 800px;
+            bottom: 85px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        .slider-prev, .slider-next {
+            width: 40px;
+            height: 40px;
+            border-radius: 40px;
+            background-color: #f4f4f4;
+        }
+        .slider-prev {
+            background-image: url(./images/index/pri-prev.png);
+            background-repeat: no-repeat;
+            background-position: center center;
+            cursor: pointer;
+        }
+        .slider-next {
+            background-image: url(./images/index/pri-next.png);
+            background-repeat: no-repeat;
+            background-position: center center;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -354,18 +414,30 @@
         <ul>
             <li class="dot-li">
                 <a href="#">
+                    <span class="dot-back"></span>
                     <span class="dot"></span>  
                 </a> 
                 <span class="dot-box"><span class="dot-pop">Main</span></span>
             </li>
             <li class="dot-li">
                 <a href="#">
+                    <span class="dot-back"></span>
                     <span class="dot"></span>
                 </a>
                 <span class="dot-box"><span class="dot-pop">Premium</span></span>
             </li>
-            <li class="dot-li"><a href="#"><span class="dot"></span></a></li>
-            <li class="dot-li"><a href="#"><span class="dot"></span></a></li>
+            <li class="dot-li">
+                <a href="#">
+                    <span class="dot-back"></span>
+                    <span class="dot"></span>
+                </a>
+            </li>
+            <li class="dot-li">
+                <a href="#">
+                    <span class="dot-back"></span>
+                    <span class="dot"></span>
+                </a>
+            </li>
         </ul>   
     </nav>
     <nav class="quick-container">
@@ -464,7 +536,7 @@
             <li class="pri">
                 <ul>
                     <li class="pri-content">
-                        <div class="pri-txt">
+                        <div class="pri-txt txt1">
                             <span>PREMIUM</span>
                             <span>LOCATION PREMIUM 01</span>
                             <span></span>
@@ -474,6 +546,54 @@
                         </div>
                         <div class="right-img">
                             <img src="./images/index/pri-main-1.png" alt="">
+                        </div>
+                        <div class="slider-btn">
+                            <span class="slider-prev first-prev"></span>
+                            <span class="slider-next"></span>
+                        </div>
+                        <div class="pri-txt txt2">
+                            <span>PREMIUM</span>
+                            <span>LOCATION PREMIUM 02</span>
+                            <span></span>
+                            <span>올인 교통 프리미엄</span>
+                            <span>4호선 및 수인분당선, 제3경인고속도로, 신안산선,<br>월곶판교선, 배곶대교(예정)의 교통프리미엄</span>
+                            <a href="#">More view</a>
+                        </div>
+                        <div class="right-img">
+                            <img src="./images/index/pri-main-2.png" alt="">
+                        </div>
+                        <div class="pri-txt txt3">
+                            <span>PREMIUM</span>
+                            <span>LOCATION PREMIUM 03</span>
+                            <span></span>
+                            <span>올인 생활 프리미엄</span>
+                            <span>신세계 프리미엄아울렛, 홈플러스, 이마트,<br>롯데마트, 서울대병원(예정)의 편리한 생활 프리미엄</span>
+                            <a href="#">More view</a>
+                        </div>
+                        <div class="right-img">
+                            <img src="./images/index/pri-main-3.png" alt="">
+                        </div>
+                        <div class="pri-txt txt4">
+                            <span>PREMIUM</span>
+                            <span>LOCATION PREMIUM 04</span>
+                            <span></span>
+                            <span>올인 자연 프리미엄</span>
+                            <span>오이도 옥구, 선사유적공원, 배곧생명공원, 배움의 숲<br>대자연을 품은 에코파크 자연프리미엄</span>
+                            <a href="#">More view</a>
+                        </div>
+                        <div class="right-img">
+                            <img src="./images/index/pri-main-4.png" alt="">
+                        </div>
+                        <div class="pri-txt txt5">
+                            <span>PREMIUM</span>
+                            <span>LOCATION PREMIUM 05</span>
+                            <span></span>
+                            <span>올인 수요 프리미엄</span>
+                            <span>시화국가산업단지와 시화MTV 13만 여명의 근로자를<br>배후수요로 둔 최적의 투자 프리미엄</span>
+                            <a href="#">More view</a>
+                        </div>
+                        <div class="right-img">
+                            <img src="./images/index/pri-main-5.png" alt="">
                         </div>
                     </li>
                 </ul>
@@ -496,12 +616,14 @@
                 $('header').addClass('active');
                 $('.dot').addClass('active'); 
                 $('.dot-pop').addClass('active');
+                $('.dot-back').addClass('active');
                 headerToken = true;
             }
             else if(index==0){    
                 $('header').removeClass('active');
                 $('.dot').removeClass('active'); 
                 $('.dot-pop').removeClass('active');    
+                $('.dot-back').removeClass('active');
                 headerToken = false;    
             }
         }
@@ -515,10 +637,14 @@
             // 휠을 위로 올릴 때
             index = $(this).prev().index();
             sectionTop = $(this).prev().offset().top; 
+            $('.dot-back').stop().fadeOut(300)
+            $('.dot-back').eq(index).stop().fadeIn(300)
         }else if( event.deltaY < 0 ){
             // 휠을 아래로 내릴 때
             index = $(this).next().index();
-            sectionTop = ($(this).next().offset().top);
+            sectionTop = $(this).next().offset().top;
+            $('.dot-back').stop().fadeOut(300)
+            $('.dot-back').eq(index).stop().fadeIn(300)
         }
 
         init(index, sectionTop);
@@ -542,27 +668,63 @@
     $('header').on('mouseover',function(){
         $('.lnb-sub').stop().animate({'height':'200px'});
         $('.sub-back').stop().animate({'height':'180px'},300);
+        $('.sub-back').css({'border-bottom':'1px solid #d4d4d4'});
         $('header').addClass('active');
     })
     $('header').on('mouseleave',function(){
         $('.lnb-sub').stop().animate({'height':'0'},300);
         $('.sub-back').stop().animate({'height':'0'});
+        $('.sub-back').css({'border-bottom':'transparent'});
         if(!headerToken) $('header').removeClass('active');
+    })
+
+    let sliderToken = 0;
+    $('.slider-prev').click(function(){
+        if(sliderToken!=0){
+            sliderToken--;
+            $('.pri-txt').stop().fadeOut(400);
+            $('.pri-txt').eq(sliderToken).stop().fadeIn(400);
+            $('.slider-next').stop().animate({'opacity':'1'});
+            $('.right-img').stop().fadeOut(300);
+            $('.right-img').eq(sliderToken).stop().fadeIn(300);
+        }
+        if(sliderToken==1){
+            $(this).stop().animate({'opacity':'.3'});
+        }
+    })
+    $('.slider-next').click(function(){
+        if(sliderToken != 4){
+            sliderToken++;
+            $('.pri-txt').stop().fadeOut(400);
+            $('.pri-txt').eq(sliderToken).stop().fadeIn(400);
+            $('.slider-prev').stop().animate({'opacity':'1'});
+            $('.right-img').stop().fadeOut(300);
+            $('.right-img').eq(sliderToken).stop().fadeIn(300);
+        }
+        if(sliderToken==4){
+            $(this).stop().animate({'opacity':'.3'});
+        }
     })
 
     let toggle = 0;
     $(window).ready(function(){
-        $('.back1').animate({"margin-left":"40px"},4000)
+        $('.pri-txt').hide();
+        $('.txt1').show();
+        $('.dot-back').eq(0).fadeIn(300);
+        $('.slider-prev').animate({'opacity':'.3'});
+        $('.back1').animate({"margin-left":"40px"},4000);
+        $('.right-img').hide();
+        $('.right-img').eq(0).fadeIn(300);
         setInterval(() => {
             if(toggle===-1){
                 $('.bg1').animate({opacity : '1'},400);   
-                $('.back1').animate({"margin-left":"40px"},4000)
+                $('.back1').animate({"margin-left":"40px"},4000);
                 toggle++;
             }
             else if(toggle===0){
                 $('.bg1').animate({opacity : '0'},400);
-                $('.back2').animate({"margin-left":"40px"},4000).animate({'margin-left':'0'},0)
-                $('.back1').animate({"margin-left":"40px"},4000).animate({'margin-left':'0'},0)
+                $('.back2').animate({"margin-left":"40px"},4000).animate({'margin-left':'0'},0);
+                $('.back1').animate({"margin-left":"40px"},4000).animate({'margin-left':'0'},0);
                 toggle= -1;
             }
         }, 4000);
